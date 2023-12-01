@@ -1,6 +1,5 @@
 package com.kittynicky.hangman;
 
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Game {
@@ -20,26 +19,25 @@ public class Game {
 
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        hiddenWord.setHiddenWord(words.getRandomWord());
-        printGameInfo();
+        printInfo();
 
         while (true) {
             System.out.println("Введите букву [а - я]:");
             String line = scanner.nextLine();
 
-            if (!validate(line)) {
-                System.out.println("Введено более 1 символа. Попробуйте еще раз.");
+            if (!InputValidator.validate(line)) {
+                System.out.println("Введено более 1 символа. Попробуйте еще раз.\n");
                 continue;
             }
 
             char letter = line.charAt(0);
-            if (!validate(letter)) {
-                System.out.println("Неизвестный символ. Попробуйте снова.");
+            if (!InputValidator.validate(letter)) {
+                System.out.println("Неизвестный символ. Попробуйте снова.\n");
                 continue;
             }
 
             if (hiddenWord.getEnteredLetters().contains(letter)) {
-                System.out.println("Буква '" + letter + "' уже была введена ранее. Попробуйте еще раз.");
+                System.out.println("Буква '" + letter + "' уже была введена ранее. Попробуйте еще раз.\n");
                 continue;
             }
 
@@ -48,19 +46,19 @@ public class Game {
             if (!hiddenWord.contains(letter)) {
                 setCountErrors(getCountErrors() + 1);
                 if (this.getCountErrors() == MAX_ERRORS) {
-                    printGameInfo();
-                    System.out.println("Вы проиграли...");
+                    printInfo();
+                    System.out.println("Вы проиграли.\n");
                     break;
                 }
             }
 
-            if (hiddenWord.isWordDecrypted()) {
-                printGameInfo();
-                System.out.println("Поздравляем! Вы отгадали слово!");
+            if (hiddenWord.isHiddenWordDecrypted()) {
+                printInfo();
+                System.out.println("Поздравляем! Вы выиграли!\n");
                 break;
             }
 
-            printGameInfo();
+            printInfo();
         }
     }
 
@@ -72,16 +70,10 @@ public class Game {
         this.countErrors = countErrors;
     }
 
-    private void printGameInfo() {
+    private void printInfo() {
         hangman.printHangman(getCountErrors());
-        System.out.println("encrypted word=" + hiddenWord.getEncryptedHiddenWord() + "\ncount errors=" + getCountErrors());
-    }
-
-    private boolean validate(Character c) {
-        return c >= 'а' && c <= 'я';
-    }
-
-    private boolean validate(String s) {
-        return s.length() == 1;
+        System.out.println("encrypted word: " + hiddenWord.getEncryptedHiddenWord()
+                + "\ncount errors: " + getCountErrors()
+                + "\n");
     }
 }
