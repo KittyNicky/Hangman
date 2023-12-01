@@ -4,21 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class HiddenWord {
-    private String hiddenWord;
+    private final String hiddenWord;
     private final Set<Character> enteredLetters = new HashSet<>();
 
-    public HiddenWord() {
-    }
-
     public HiddenWord(String hiddenWord) {
-        this.hiddenWord = hiddenWord;
-    }
-
-    public String getHiddenWord() {
-        return hiddenWord;
-    }
-
-    public void setHiddenWord(String hiddenWord) {
         this.hiddenWord = hiddenWord;
     }
 
@@ -47,7 +36,7 @@ public class HiddenWord {
         return encryptedWord.toString();
     }
 
-    public boolean isWordDecrypted() {
+    public boolean isHiddenWordDecrypted() {
         return getEncryptedHiddenWord().indexOf('*') == -1;
     }
 }

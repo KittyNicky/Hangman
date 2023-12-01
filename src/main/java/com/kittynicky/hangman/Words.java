@@ -7,14 +7,15 @@ import java.util.*;
 
 public class Words {
     private static final String WORDS_PATH = "src/main/resources/russian_nouns.txt";
-    private static final int MIN_WORD_LENGTH = 6;
-    private final List<String> listWords = new ArrayList<>();
+    private static final int MIN_WORD_LENGTH = 5;
+    private final List<String> listWords;
 
     public Words() {
+        this.listWords = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(WORDS_PATH))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.length() > MIN_WORD_LENGTH) {
+                if (line.length() < MIN_WORD_LENGTH) {
                     continue;
                 }
                 this.listWords.add(line);
