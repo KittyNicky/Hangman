@@ -11,7 +11,6 @@ public class App {
             String line = scanner.nextLine();
 
             if (!InputValidator.validate(line)) {
-                System.out.println("Введено более 1 символа. Попробуйте еще раз.\n");
                 continue;
             }
 

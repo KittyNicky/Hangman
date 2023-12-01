@@ -26,18 +26,16 @@ public class Game {
             String line = scanner.nextLine();
 
             if (!InputValidator.validate(line)) {
-                System.out.println("Введено более 1 символа. Попробуйте еще раз.\n");
                 continue;
             }
 
             char letter = line.charAt(0);
             if (!InputValidator.validate(letter)) {
-                System.out.println("Неизвестный символ. Попробуйте снова.\n");
                 continue;
             }
 
             if (hiddenWord.getEnteredLetters().contains(letter)) {
-                System.out.println("Буква '" + letter + "' уже была введена ранее. Попробуйте еще раз.\n");
+                System.out.println("Буква '" + letter + "' уже была введена ранее. Попробуйте снова.\n");
                 continue;
             }
 
